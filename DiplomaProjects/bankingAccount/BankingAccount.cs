@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace DiplomaProjects.bankingAccount
 {
-    internal class BankingAccount
+    public class BankingAccount
     {
         private string ownerFullName { get; set; }
         private string accountNumber { get; set; }
         private double balance { get; set; }
-        private readonly ILogger<UserLogin> _logger;
+        public static readonly ILogger<UserLogin> _logger;
 
-        public BankingAccount(string ownerFullName, string accountNumber, double balance, ILogger<BankingAccount> logger)
+        public BankingAccount(string ownerFullName, string accountNumber, double balance)
         {
             this.ownerFullName = ownerFullName;
             this.accountNumber = accountNumber;
             this.balance = balance;
-            _logger = logger;
+            
         }
         public void deposit(double amount)
         {
@@ -60,9 +60,11 @@ namespace DiplomaProjects.bankingAccount
         public void displayInfo()
         {
             _logger.LogInformation(
-        $"Account Holder: {ownerFullName}, Account Number: {accountNumber}");
+        "Account Holder: {Holder}, Account Number: {Number}",
+        ownerFullName,
+        accountNumber);
 
-            _logger.LogInformation($"Balance: {balance:F2}");
+            _logger.LogInformation("Balance: {Balance}", balance);
         }
 
    

@@ -7,12 +7,9 @@ namespace DiplomaProjects.login
 {
     public class UserLogin
     {
-        private readonly ILogger<UserLogin> _logger;
+        private static readonly ILogger<UserLogin> _logger;
 
-        public UserLogin(ILogger<UserLogin> logger)
-        {
-            _logger = logger;
-        }
+   
 
         public static void Authenticate()
         {
