@@ -5,11 +5,21 @@ using System.IO;
 
 namespace DiplomaProjects.login
 {
-    public class UserLogin
+    public static class UserLogin
     {
-        private static readonly ILogger<UserLogin> _logger;
+        private static readonly ILogger _logger;
 
-   
+        static UserLogin()
+        {
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+            });
+
+            _logger = loggerFactory.CreateLogger("UserLogin");
+        }
+
+
 
         public static void Authenticate()
         {

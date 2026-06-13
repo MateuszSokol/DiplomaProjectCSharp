@@ -1,72 +1,64 @@
-﻿using DiplomaProjects.login;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Logging;
 
-namespace DiplomaProjects.bankingAccount
+public class BankingAccount
 {
-    public class BankingAccount
+    private readonly ILogger<BankingAccount> _logger;
+
+    private string ownerFullName { get; set; }
+    private string accountNumber { get; set; }
+    private double balance { get; set; }
+
+    public BankingAccount(
+        string ownerFullName,
+        string accountNumber,
+        double balance,
+        ILogger<BankingAccount> logger)
     {
-        private string ownerFullName { get; set; }
-        private string accountNumber { get; set; }
-        private double balance { get; set; }
-        public static readonly ILogger<UserLogin> _logger;
+        this.ownerFullName = ownerFullName;
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        _logger = logger;
+    }
 
-        public BankingAccount(string ownerFullName, string accountNumber, double balance)
+    public void deposit(double amount)
+    {
+        if (amount > 0)
         {
-            this.ownerFullName = ownerFullName;
-            this.accountNumber = accountNumber;
-            this.balance = balance;
-            
+            balance += amount;
+            _logger.LogInformation("Deposit successful!");
         }
-        public void deposit(double amount)
+        else
         {
-            if (amount > 0)
-            {
-                balance += amount;
-                _logger.LogInformation("Deposit successful!");
-            }
-            else
-            {
-                _logger.LogInformation("Amount must be positive.");
-            }
+            _logger.LogInformation("Amount must be positive.");
         }
-        public double getBalance()
+    }
+
+    public double getBalance() => balance;
+
+    public void withdraw(double amount)
+    {
+        if (amount > 0 && amount <= balance)
         {
-            return balance;
+            balance -= amount;
+            _logger.LogInformation("Withdraw successful!");
         }
-
-        public void withdraw(double amount)
+        else if (amount > balance)
         {
-            if (amount > 0 && amount <= balance)
-            {
-                balance -= amount;
-                _logger.LogInformation("Withdraw successful!");
-            }
-            else if (amount > balance)
-            {
-                _logger.LogInformation("Insufficient funds.");
-            }
-            else
-            {
-                _logger.LogInformation("Only positive amount acceptable.");
-            }
+            _logger.LogInformation("Insufficient funds.");
         }
-
-
-        public void displayInfo()
+        else
         {
-            _logger.LogInformation(
-        "Account Holder: {Holder}, Account Number: {Number}",
-        ownerFullName,
-        accountNumber);
-
-            _logger.LogInformation("Balance: {Balance}", balance);
+            _logger.LogInformation("Only positive amount acceptable.");
         }
+    }
 
-   
+    public void displayInfo()
+    {
+        _logger.LogInformation(
+            "Account Holder: {Holder}, Account Number: {Number}",
+            ownerFullName,
+            accountNumber);
+
+        _logger.LogInformation("Balance: {Balance}", balance);
     }
 }
