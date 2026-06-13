@@ -8,6 +8,7 @@ namespace DiplomaProjects
     {
         public static string HashPassword(string password)
         {
+
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] hashedBytes = sha256.ComputeHash(

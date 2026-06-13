@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DiplomaProjects.dataOperation
 {
-    public class DataOperations
+    public static class DataOperations
     {
         public static Student? FindStudent(List<Student> students, int id)
         {

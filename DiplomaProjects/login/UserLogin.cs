@@ -1,17 +1,26 @@
-﻿using System;
+﻿using DiplomaProjects.Library;
+using Microsoft.Extensions.Logging;
+using System;
 using System.IO;
 
-namespace DiplomaProjects
+namespace DiplomaProjects.login
 {
-    internal class UserLogin
+    public class UserLogin
     {
-        public void Authenticate()
+        private readonly ILogger<UserLogin> _logger;
+
+        public UserLogin(ILogger<UserLogin> logger)
+        {
+            _logger = logger;
+        }
+
+        public static void Authenticate()
         {
             string filePath = "users.txt";
 
             if (!File.Exists(filePath))
             {
-                Console.WriteLine("Plik users.txt nie istnieje.");
+                _logger.LogInformation("Plik users.txt nie istnieje.");
                 return;
             }
 
@@ -19,7 +28,7 @@ namespace DiplomaProjects
 
             if (lines.Length < 2)
             {
-                Console.WriteLine("Nieprawidłowy format pliku users.txt.");
+                _logger.LogInformation("Nieprawidłowy format pliku users.txt.");
                 return;
             }
 
@@ -38,11 +47,11 @@ namespace DiplomaProjects
             if (inputUser == storedUser &&
                 inputHashedPass == storedHashedPass)
             {
-                Console.WriteLine("Password and login match");
+                _logger.LogInformation("Password and login match");
             }
             else
             {
-                Console.WriteLine("Invalid password or login");
+                _logger.LogInformation("Invalid password or login");
             }
         }
     }

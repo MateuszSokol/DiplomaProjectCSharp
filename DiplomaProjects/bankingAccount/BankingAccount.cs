@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DiplomaProjects.login;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,23 +13,25 @@ namespace DiplomaProjects.bankingAccount
         private string ownerFullName { get; set; }
         private string accountNumber { get; set; }
         private double balance { get; set; }
+        private readonly ILogger<UserLogin> _logger;
 
-        public BankingAccount(string ownerFullName, string accountNumber, double balance)
+        public BankingAccount(string ownerFullName, string accountNumber, double balance, ILogger<UserLogin> logger)
         {
             this.ownerFullName = ownerFullName;
             this.accountNumber = accountNumber;
             this.balance = balance;
+            _logger = logger;
         }
         public void deposit(double amount)
         {
             if (amount > 0)
             {
                 balance += amount;
-                Console.WriteLine("Deposit successful!");
+                _logger.LogInformation("Deposit successful!");
             }
             else
             {
-                Console.WriteLine("Amount must be positive.");
+                _logger.LogInformation("Amount must be positive.");
             }
         }
         public double getBalance()
@@ -40,24 +44,24 @@ namespace DiplomaProjects.bankingAccount
             if (amount > 0 && amount <= balance)
             {
                 balance -= amount;
-                Console.WriteLine("Withdraw successful!");
+                _logger.LogInformation("Withdraw successful!");
             }
             else if (amount > balance)
             {
-                Console.WriteLine("Insufficient funds.");
+                _logger.LogInformation("Insufficient funds.");
             }
             else
             {
-                Console.WriteLine("Only positive amount acceptable.");
+                _logger.LogInformation("Only positive amount acceptable.");
             }
         }
 
 
         public void displayInfo()
         {
-            Console.WriteLine("Account Holder: " + ownerFullName);
-            Console.WriteLine("Account Number: " + accountNumber);
-            Console.WriteLine($"Balance: {balance:F2}");
+            _logger.LogInformation("Account Holder: " + ownerFullName);
+            _logger.LogInformation("Account Number: " + accountNumber);
+            _logger.LogInformation($"Balance: {balance:F2}");
         }
 
    
