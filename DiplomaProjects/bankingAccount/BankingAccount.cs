@@ -15,7 +15,7 @@ namespace DiplomaProjects.bankingAccount
         private double balance { get; set; }
         private readonly ILogger<UserLogin> _logger;
 
-        public BankingAccount(string ownerFullName, string accountNumber, double balance, ILogger<UserLogin> logger)
+        public BankingAccount(string ownerFullName, string accountNumber, double balance, ILogger<BankingAccount> logger)
         {
             this.ownerFullName = ownerFullName;
             this.accountNumber = accountNumber;
@@ -59,8 +59,9 @@ namespace DiplomaProjects.bankingAccount
 
         public void displayInfo()
         {
-            _logger.LogInformation("Account Holder: " + ownerFullName);
-            _logger.LogInformation("Account Number: " + accountNumber);
+            _logger.LogInformation(
+        $"Account Holder: {ownerFullName}, Account Number: {accountNumber}");
+
             _logger.LogInformation($"Balance: {balance:F2}");
         }
 
