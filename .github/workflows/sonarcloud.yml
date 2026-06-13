@@ -23,19 +23,18 @@ jobs:
       - name: Install SonarScanner for .NET
         run: dotnet tool install --global dotnet-sonarscanner
 
-      - name: Build project
-        run: dotnet build DiplomaProjects/DiplomaProjects.csproj --no-incremental
-
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
+          cd $GITHUB_WORKSPACE
+
           dotnet sonarscanner begin \
-            /k:"DiplomaProjectCSharp" \
+            /k:"DiplomaProjectCsharp" \
             /o:"mateuszsokol" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.login="$SONAR_TOKEN"
 
-          dotnet build DiplomaProjects/DiplomaProjects.csproj
+          dotnet build DiplomaProjects.sln --no-incremental
 
           dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
