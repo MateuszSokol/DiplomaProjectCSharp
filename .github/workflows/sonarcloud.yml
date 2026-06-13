@@ -31,7 +31,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           dotnet sonarscanner begin \
-            /k:"DiplomaProjectCsharp" \
+            /k:"DiplomaProjectCSharp" \
             /o:"mateuszsokol" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.login="$SONAR_TOKEN"
