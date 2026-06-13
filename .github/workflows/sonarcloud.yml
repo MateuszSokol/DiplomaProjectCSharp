@@ -24,7 +24,7 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: Build project
-        run: dotnet build DiplomaProjects.sln --no-incremental
+        run: dotnet build DiplomaProjects/DiplomaProjects.csproj --no-incremental
 
 
       - name: SonarCloud Scan
