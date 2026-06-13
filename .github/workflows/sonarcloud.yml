@@ -24,7 +24,7 @@ jobs:
         run: dotnet tool install --global dotnet-sonarscanner
 
       - name: Build project
-        run: dotnet build --no-incremental
+        run: dotnet build DiplomaProjects/DiplomaProjects.csproj --no-incremental
 
       - name: SonarCloud Scan
         env:
@@ -36,6 +36,6 @@ jobs:
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.login="$SONAR_TOKEN"
 
-          dotnet build
+          dotnet build DiplomaProjects/DiplomaProjects.csproj
 
           dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
