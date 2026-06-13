@@ -12,7 +12,7 @@ namespace DiplomaProjects.dataOperation
         public int studentId { get; set; }
         public string studentName { get; set; }
         public string gender { get; set; }
-        ArrayList students = new ArrayList();
+        readonly ArrayList students = new ArrayList();
 
         public Student(int studentId, string studentName, string gender)
         {

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace DiplomaProjects.library
+namespace DiplomaProjects.Library
 {
-    internal class Book
+    public class Book
     {
-        private string bookTitle{ get; set; }
-        private string author { get; set; }
-        private string ISBN { get; set; }
+        public string bookTitle{ get; set; }
+        public string author { get; set; }
+        public string ISBN { get; set; }
 
         public Book(string bookTitle, string author, string ISBN)
         {

@@ -5,12 +5,12 @@ namespace DiplomaProjects.dataOperation
 {
     public class DataOperations
     {
-        public Student? FindStudent(List<Student> students, int id)
+        public static Student? FindStudent(List<Student> students, int id)
         {
             return students.FirstOrDefault(s => s.studentId == id);
         }
 
-        public List<Student> FindOnlyMaleStudents(List<Student> students)
+        public static List<Student> FindOnlyMaleStudents(List<Student> students)
         {
             string gender = "Male";
 
@@ -19,7 +19,7 @@ namespace DiplomaProjects.dataOperation
                 .ToList();
         }
 
-        public List<Student> SortedStudentByName(List<Student> students)
+        public static List<Student> SortedStudentByName(List<Student> students)
         {
             return students
                 .OrderBy(s => s.studentName)

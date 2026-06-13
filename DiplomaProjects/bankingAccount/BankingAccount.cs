@@ -57,7 +57,7 @@ namespace DiplomaProjects.bankingAccount
         {
             Console.WriteLine("Account Holder: " + ownerFullName);
             Console.WriteLine("Account Number: " + accountNumber);
-            Console.WriteLine("Balance: %.2f\n", balance);
+            Console.WriteLine($"Balance: {balance:F2}");
         }
 
    
