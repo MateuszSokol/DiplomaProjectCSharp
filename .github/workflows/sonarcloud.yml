@@ -26,7 +26,6 @@ jobs:
       - name: Build project
         run: dotnet build DiplomaProjects/DiplomaProjects.csproj --no-incremental
 
-
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -37,6 +36,6 @@ jobs:
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.login="$SONAR_TOKEN"
 
-          dotnet build
+          dotnet build DiplomaProjects/DiplomaProjects.csproj
 
           dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"
