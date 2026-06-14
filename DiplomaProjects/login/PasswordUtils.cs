@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DiplomaProjects
 {
-    internal static class PasswordUtils
+    public static class PasswordUtils
     {
         public static string HashPassword(string password)
         {
