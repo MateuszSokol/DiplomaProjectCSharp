@@ -1,27 +1,19 @@
-﻿using DiplomaProjects.Library;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 
 namespace DiplomaProjects.login
 {
-    public static class UserLogin
+    public class UserLogin
     {
-        private static readonly ILogger _logger;
+        private readonly ILogger<UserLogin> _logger;
 
-        static UserLogin()
+        public UserLogin(ILogger<UserLogin> logger)
         {
-            using var loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-            });
-
-            _logger = loggerFactory.CreateLogger("UserLogin");
+            _logger = logger;
         }
 
-
-
-        public static void Authenticate()
+        public void Authenticate()
         {
             string filePath = "users.txt";
 
@@ -48,11 +40,9 @@ namespace DiplomaProjects.login
             Console.Write("Password: ");
             string inputPass = Console.ReadLine();
 
-            string inputHashedPass =
-                PasswordUtils.HashPassword(inputPass);
+            string inputHashedPass = PasswordUtils.HashPassword(inputPass);
 
-            if (inputUser == storedUser &&
-                inputHashedPass == storedHashedPass)
+            if (inputUser == storedUser && inputHashedPass == storedHashedPass)
             {
                 _logger.LogInformation("Password and login match");
             }

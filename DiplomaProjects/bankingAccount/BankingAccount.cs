@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
+namespace DiplomaProjects.bankingAccount;
 public class BankingAccount
 {
     private readonly ILogger<BankingAccount> _logger;
